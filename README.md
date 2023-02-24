@@ -8,7 +8,7 @@ Nuestro [**Servidor**](https://teamarcades.xyz/discord) de Discord nos dedicamos
 **NOTA:** esta es una explicacion simple de como crear una [Dashboard](https://teamarcades.xyz/), con esta explicacion rapida usted podra crear un bot con dashboard mucho mejor y avanzado.
  
 
-# Guia de instalacion [Video](https://www.youtube.com/watch?v=EAfG8GnkNhY&t=434s) 🔥
+# Guia de instalacion [Video]([https://www.youtube.com/watch?v=EAfG8GnkNhY&t=434s](https://www.youtube.com/watch?v=DKw1zRMt4lU&t=412s)) 🔥
 
 ## ✅ Requisitos para su maquina
 
@@ -26,7 +26,7 @@ Nuestro [**Servidor**](https://teamarcades.xyz/discord) de Discord nos dedicamos
   <summary>Click para ver</summary>
  
    1. Ejecute en su consola: `git clone https://github.com/k4itrun/Example_discordbot_dashboard`<br />
-   * Descargelo desde precionando aqui [ejemplo-de-dashboard](https://github.com/Truchorko5566/ejemplo-de-dashboard/archive/refs/heads/master.zip)<br />
+   * Descargelo desde precionando aqui [example_discordbot_dashboard](https://github.com/k4itrun/example_discordbot_dashboard/archive/refs/heads/master.zip)<br />
      * Entre a `cd Example_discordbot_dashboard`<br />
      * Entre a `cd Example_discordbot_dashboard/config.json` y agrege sus datos en el **TOKEN**<br />
      * Entre a `cd Example_discordbot_dashboard/dashboard/dash.json` y agrege sus datos en **CLIENTID** y **SECRET**<br />
