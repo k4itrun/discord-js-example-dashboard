@@ -1,39 +1,26 @@
-    /**********************************************************
-     * @INFO  [TABLA DE CONTENIDO]
-     * 1  colocar datos en ./dash.json
-     * 
-     *   BOT CODED BY: Luis Misaki#4165 | https://team.arcades.ga/discord
-     *********************************************************/
-    const passort = require("passport");
-    const bodyParser = require("body-parser");
-    const Strategy = require("passport-discord").Strategy;
-    const Settings = require("./dash.json");
-    const passport = require("passport");
-    const express = require("express");
-    const url = require("url");
-    const path = require("path");
-    const Discord = require("discord.js");
-    const ejs = require("ejs");
-    const BotConfig = require("../config.json");
 
-    module.exports = client => {
-    /**********************************************************
-     * backend
-     *********************************************************/
+const DASHBOARD = require(`${process.cwd()}/src/JSON/settings.json`);
+const CONFIG = require(`${process.cwd()}/src/JSON/settings.json`);
+const bodyParser = require("body-parser");
+const Strategy = require("passport-discord").Strategy;
+const passport = require("passport");
+const express = require("express");
+const url = require("url");
+const path = require("path");
+const Discord = require("discord.js");
+const ejs = require("ejs");
+
+module.exports = client => {
     const app = express();
     const session = require("express-session");
     const MemoryStore = require("memorystore")(session);
 
-
-    /**********************************************************
-     * incio de session con discord
-     *********************************************************/
     passport.serializeUser((user, done) => done(null, user))
     passport.deserializeUser((obj, done) => done(null, obj))
     passport.use(new Strategy({
-        clientID: Settings.config.CLIENT_ID,
-        clientSecret: process.env.CLIENT_SECRET || Settings.config.CLIENT_SECRET,
-        callbackURL: Settings.config.CALLBACK,
+        clientID: DASHBOARD.WWW.CONFIG.CLIENT_ID,
+        clientSecret: process.env.CLIENT_SECRET || DASHBOARD.WWW.CONFIG.CLIENT_SECRET,
+        callbackURL: DASHBOARD.WWW.CONFIG.CALLBACK,
         scope: ["identify", "guilds", "guilds.join"]
     },
     (accessToken, refreshToken, profile, done) => {
@@ -48,15 +35,11 @@
         saveUninitialized: false
     }))
 
-    /**********************************************************
-     * medios
-     *********************************************************/
     app.use(passport.initialize());
     app.use(passport.session());
 
     app.set("view engine", "ejs");
     app.set("views", path.join(__dirname, "./views"));
-
 
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({
@@ -67,14 +50,8 @@
         extended: true
     }));
 
-    /**********************************************************
-     * carga todos los archivos css para ejecutar un ruta mejor
-     *********************************************************/
     app.use(express.static(path.join(__dirname, "./css")));
 
-    /**********************************************************
-     * carga todos los archivos js para ejecutar un ruta mejor
-     *********************************************************/
     app.use(express.static(path.join(__dirname, "./js")));
 
     const checkAuth = (req, res, next) => {
@@ -98,9 +75,6 @@
         }, passport.authenticate("discord", { prompt: "none"})
     );
 
-    /**********************************************************
-     * callback para logear
-     *********************************************************/
     app.get("/callback", passport.authenticate("discord", { failureRedirect: "/" }), async (req, res) => {
         let banned = false
         if(banned) {
@@ -124,9 +98,9 @@
             req: req,
             user: req.isAuthenticated() ? req.user : null,
             bot: client,
-            Permissions: Discord.Permissions,
-            botconfig: Settings.site,
-            callback: Settings.config.CALLBACK,
+            Permissions: Discord.PermissionsBitField,
+            botconfig: DASHBOARD.WWW.SITE,
+            callback: DASHBOARD.WWW.CONFIG.CALLBACK,
         })
     })
 
@@ -140,24 +114,18 @@
             req: req,
             user: req.isAuthenticated() ? req.user : null,
             bot: client,
-            Permissions: Discord.Permissions,
-            botconfig: Settings.site,
-            callback: Settings.config.CALLBACK,
+            Permissions: Discord.PermissionsBitField,
+            botconfig: DASHBOARD.WWW.SITE,
+            callback: DASHBOARD.WWW.CONFIG.CALLBACK,
         })
     })
 
-    /**********************************************************
-     * discord server
-     *********************************************************/
     app.get("/discord", (req, res) => {
-        res.redirect(`${Settings.site.DISCORD}`)
+        res.redirect(`${DASHBOARD.WWW.SITE.DISCORD}`)
     });
 
-    /**********************************************************
-     * incitacion
-     *********************************************************/
     app.get("/invite", (req, res) => {
-        res.redirect(`https://discord.com/api/oauth2/authorize?client_id=${Settings.config.CLIENT_ID}&permissions=8&scope=bot%20applications.commands`)
+        res.redirect(`https://discord.com/api/oauth2/authorize?client_id=${DASHBOARD.WWW.CONFIG.CLIENT_ID}&permissions=8&scope=bot%20applications.commands`)
     });
 
     app.get("/dashboard/:guildID", checkAuth, async (req, res) => {
@@ -174,9 +142,9 @@
         }
         if(!member)
         return res.redirect("/?error=" + encodeURIComponent("Inicia sesión primero por favor! / ¡Únete al gremio de nuevo!"))
-        if(!member.permissions.has(Discord.Permissions.FLAGS.MANAGE_GUILD))
+        if(!member.permissions.has(Discord.PermissionsBitField.Flags.ManageGuild))
         return res.redirect("/?error=" + encodeURIComponent("no tienes permitido hacer eso"))
-        client.settings.ensure(guild.id, {
+        client.database.settings.ensure(guild.id, {
             prefix: BotConfig.prefix,
             holamundo: "Hola como estas :)",
         });
@@ -185,9 +153,9 @@
             user: req.isAuthenticated() ? req.user : null,
             guild: guild,
             bot: client,
-            Permissions: Discord.Permissions,
-            botconfig: Settings.site,
-            callback: Settings.config.CALLBACK,
+            Permissions: Discord.PermissionsBitField,
+            botconfig: DASHBOARD.WWW.SITE,
+            callback: DASHBOARD.WWW.CONFIG.CALLBACK,
         })
     })
 
@@ -205,43 +173,36 @@
         }
         if(!member)
         return res.redirect("/?error=" + encodeURIComponent("Inicia sesión primero por favor! / ¡Únete al gremio de nuevo!"))
-        if(!member.permissions.has(Discord.Permissions.FLAGS.MANAGE_GUILD))
+        if(!member.permissions.has(Discord.PermissionsBitField.Flags.ManageGuild))
         return res.redirect("/?error=" + encodeURIComponent("no tienes permitido hacer eso"))
-        client.settings.ensure(guild.id, {
-            prefix: BotConfig.prefix,
-            holamundo: "Hola como estas :)",
+        client.database.settings.ensure(guild.id, {
+            PREFIX: CONFIG.CLIENT.PREFIX,
+            MESSAGE_BOT: "Hola como estas :)",
         });
-        if(req.body.prefix) client.settings.set(guild.id, req.body.prefix, "prefix");
-        if(req.body.holamundo) client.settings.set(guild.id, req.body.holamundo, "holamundo");
+        if(req.body.PREFIX) client.settings.set(guild.id, req.body.PREFIX, "PREFIX");
+        if(req.body.MESSAGE_BOT) client.settings.set(guild.id, req.body.MESSAGE_BOT, "MESSAGE_BOT");
         res.render("settings", {
             req: req,
             user: req.isAuthenticated() ? req.user : null,
             guild: guild,
             bot: client,
-            Permissions: Discord.Permissions,
-            botconfig: Settings.site,
-            callback: Settings.config.CALLBACK,
+            Permissions: Discord.PermissionsBitField,
+            botconfig: DASHBOARD.WWW.SITE,
+            callback: DASHBOARD.WWW.CONFIG.CALLBACK,
         })
     })
 
-    /**********************************************************
-     * 404
-     *********************************************************/
     app.get("*", (req, res) => {
         var fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
-        if (fullUrl == Settings.site.DOMAIN || fullUrl == Settings.site.DOMAIN || fullUrl == Settings.site.DOMAIN || fullUrl == Settings.site.DOMAIN ) {
+        if (fullUrl == DASHBOARD.WWW.SITE.HOST || fullUrl == DASHBOARD.WWW.SITE.HOST || fullUrl == DASHBOARD.WWW.SITE.HOST || fullUrl == DASHBOARD.WWW.SITE.HOST ) {
             res.redirect("index.ejs");
         } else {
             res.redirect("/");
         }
     });
 
-    /**********************************************************
-     * inciar la dashboard
-     *********************************************************/
     const http = require("http").createServer(app);
-    http.listen(Settings.config.PORT, () => {
-        console.log(`Dashboard online en el puerto: ${Settings.config.PORT}, ${Settings.site.DOMAIN}`);
+    http.listen(DASHBOARD.WWW.SITE.PORT, () => {
+        console.log(`Dashboard online en el puerto: ${DASHBOARD.WWW.SITE.PORT}, ${DASHBOARD.WWW.SITE.HOST}`);
     });
-
 }

@@ -1,0 +1,27 @@
+{
+    "CLIENT": {
+        "TOKEN": "",
+        "PREFIX": "//",
+        "MONGO_URL": "",
+        "STATUS": {
+            "ACTIVITY_1": "Listening",
+            "ACTIVITY_2": "Playing",
+            "TEXT_1": "To k4itrun",
+            "TEXT_2": "Example",
+            "STATUS": "idle"
+        },
+    },
+    "WWW": {
+        "CONFIG": {
+            "CALLBACK": "http://localhost/callback",
+            "CLIENT_ID": "Add it from https://discord.dev",
+            "CLIENT_SECRET": "Add it from https://discord.dev"
+        },
+        "SITE": {
+            "DISCORD": "https://teamarcades.xyz/dc",
+            "HOST" : "http://localhost",
+            "PORT": 80,
+            "PROTOCOL": "https://"
+        }
+    }
+}

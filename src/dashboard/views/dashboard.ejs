@@ -18,8 +18,7 @@
 
                 <% if(user && user.id){ %>
                         <% user.guilds.filter(guild=>{
-                            const permsOnGuild = new Permissions(guild.permissions_new);
-                            if(permsOnGuild.has(Permissions.FLAGS.MANAGE_GUILD)) return guild;
+                            if(guild.member.permissions.has("ManageGuild")) return guild;
                         }).sort((a, b) => {
                             return (bot.guilds.cache.get(a.id) == bot.guilds.cache.get(b.id)) ? 0 : a ? -1 : 1;
                         }).forEach(guild => { %>
@@ -36,12 +35,12 @@
                                                 </div>
                                         <% if(bot.guilds.cache.get(guild.id)){ %>
                                             <div class="mc9">
-                                                <div class="mc10"><div class="mc11"><a href="<%- botconfig.domain %>/dashboard/<%- guild.id %>" class="mc12 btn-primary"><span class="mc13">Configurar</span></a></div></div>
+                                                <div class="mc10"><div class="mc11"><a href="<%- botconfig.HOST %>/dashboard/<%- guild.id %>" class="mc12 btn-primary"><span class="mc13">Configurar</span></a></div></div>
                                                 <p class="mc14"><%= guild.name %></p>
                                             </div>
                                         <% }else {  %>
                                             <div class="mc9">
-                                                <div class="mc10"><div class="mc11"><a href="<%- botconfig.domain %>/invite" class="mc12 btn-success"><span class="mc13">Invite</span></a></div></div>
+                                                <div class="mc10"><div class="mc11"><a href="<%- botconfig.HOST %>/invite" class="mc12 btn-success"><span class="mc13">Invite</span></a></div></div>
                                                 <p class="mc14"><%= guild.name %></p>
                                             </div>
                                         <% } %>

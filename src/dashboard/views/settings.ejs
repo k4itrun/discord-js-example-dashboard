@@ -16,12 +16,12 @@
                                 <form method="POST">
                                     <h5 style="margin-bottom: 0.5; margin-top: 10px; color: #828cff">Prefijo:</h5>
                                     <p style="font-style: italic;" class="disabled">Cambiar el Prefijo</p>
-                                    <input style="margin-top: -10px;" type="text" class="form-control" name="prefix" value="<%= bot.settings.get(guild.id, 'prefix') %>" placeholder="Tu prefijo">
+                                    <input style="margin-top: -10px;" type="text" class="form-control" name="prefix" value="<%= bot.database.settings.get(guild.id, 'PREFIX') %>" placeholder="Tu prefijo">
 
                                     <br><br>
                                     <h5 style="margin-bottom: 0.5; margin-top: 10px; color: #828cff">Configuracion de mensaje:</h5>
                                     <p style="font-style: italic;" class="disabled">Cambiar el mensaje</p>
-                                    <input style="margin-top: -10px;" type="text" class="form-control" name="holamundo" value="<%= bot.settings.get(guild.id, 'holamundo') %>" placeholder="Tu mensaje">
+                                    <input style="margin-top: -10px;" type="text" class="form-control" name="holamundo" value="<%= bot.database.settings.get(guild.id, 'MESSAGE_BOT') %>" placeholder="Tu mensaje">
 
 
                                     <br><br>
