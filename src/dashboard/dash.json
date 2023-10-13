@@ -1,0 +1,12 @@
+{
+    "CONFIG": {
+        "PORT": 80,
+        "CALLBACK": "http://localhost/callback",
+        "CLIENT_ID": "Add it from https://discord.dev",
+        "CLIENT_SECRET": "Add it from https://discord.dev"
+    },
+    "SITE": {
+        "DISCORD": "https://teamarcades.xyz/dc",
+        "DOMAIN" : "http://localhost"
+    }
+}
