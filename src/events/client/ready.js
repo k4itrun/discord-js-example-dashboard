@@ -2,13 +2,13 @@ const CONFIG = require(`${process.cwd()}/src/JSON/settings.json`);
 const { ActivityType } = require('discord.js');
 const moment = require("moment")
 module.exports = async (client) => {
-    client.logger("READY")
-    CHANGE_STATUS(client);
-    setInterval(()=>{
-      CHANGE_STATUS(client);
-    }, 15e3);
+    console.log("READY BOT")
+    // CHANGE_STATUS(client);
+    // setInterval(()=>{
+    //   CHANGE_STATUS(client);
+    // }, 15e3);
 }
-var state = false;
+/* var state = false;
 async function CHANGE_STATUS(client){
   if(!state){
     for(id of client.cluster.ids.map(s => s.id)){
@@ -38,3 +38,4 @@ async function CHANGE_STATUS(client){
   }
   state = !state;
 }
+*/

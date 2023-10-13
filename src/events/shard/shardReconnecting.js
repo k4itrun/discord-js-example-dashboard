@@ -1,3 +1,3 @@
 module.exports = async (client, id) => {
-    client.logger(`Shard \`#${id}\` reconnecting!`)
+    console.log(`Shard \`#${id}\` reconnecting!`.dim)
 }

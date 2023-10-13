@@ -17,12 +17,13 @@
                 </div>
 
                 <% if(user && user.id){ %>
-                        <% user.guilds.filter(guild=>{
-                            if(guild.member.permissions.has("ManageGuild")) return guild;
-                        }).sort((a, b) => {
-                            return (bot.guilds.cache.get(a.id) == bot.guilds.cache.get(b.id)) ? 0 : a ? -1 : 1;
-                        }).forEach(guild => { %>
-                    
+                    <% user.guilds.filter(guild=>{
+                        const permsOnGuild = new Permissions(guild.permissions_new);
+                        if(permsOnGuild.has(Permissions.Flags.ManageGuild)) return guild;
+                    }).sort((a, b) => {
+                        return (bot.guilds.cache.get(a.id) == bot.guilds.cache.get(b.id)) ? 0 : a ? -1 : 1;
+                    }).forEach(guild => { %>
+
                             <div class="mc0">
                                 <div class="mcw">
                                     <div class="mc1">

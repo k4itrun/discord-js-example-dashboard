@@ -1,3 +1,8 @@
+/**
+ * This code is still incomplete, I haven't finished it yet due to lack -
+ * of time, I have no idea when I will see it again, but I know I will -
+ * make improvements and solve what is missing (you can contribute by making a pull request).
+ */
 
 const DASHBOARD = require(`${process.cwd()}/src/JSON/settings.json`);
 const CONFIG = require(`${process.cwd()}/src/JSON/settings.json`);
@@ -144,9 +149,9 @@ module.exports = client => {
         return res.redirect("/?error=" + encodeURIComponent("Inicia sesión primero por favor! / ¡Únete al gremio de nuevo!"))
         if(!member.permissions.has(Discord.PermissionsBitField.Flags.ManageGuild))
         return res.redirect("/?error=" + encodeURIComponent("no tienes permitido hacer eso"))
-        client.database.settings.ensure(guild.id, {
-            prefix: BotConfig.prefix,
-            holamundo: "Hola como estas :)",
+        client.settings.ensure(guild.id, {
+            PREFIX: CONFIG.CLIENT.PREFIX,
+            MESSAGE_BOT: "Hola como estas :)",
         });
         res.render("settings", {
             req: req,
@@ -175,12 +180,12 @@ module.exports = client => {
         return res.redirect("/?error=" + encodeURIComponent("Inicia sesión primero por favor! / ¡Únete al gremio de nuevo!"))
         if(!member.permissions.has(Discord.PermissionsBitField.Flags.ManageGuild))
         return res.redirect("/?error=" + encodeURIComponent("no tienes permitido hacer eso"))
-        client.database.settings.ensure(guild.id, {
+        client.settings.ensure(guild.id, {
             PREFIX: CONFIG.CLIENT.PREFIX,
             MESSAGE_BOT: "Hola como estas :)",
         });
-        if(req.body.PREFIX) client.settings.set(guild.id, req.body.PREFIX, "PREFIX");
-        if(req.body.MESSAGE_BOT) client.settings.set(guild.id, req.body.MESSAGE_BOT, "MESSAGE_BOT");
+        if(req.body.PREFIX) client.settings.set(`${guild.id+"."+req.body.PREFIX}`, "PREFIX");
+        if(req.body.MESSAGE_BOT) client.settings.set(`${guild.id+"."+req.body.MESSAGE_BOT}`, "MESSAGE_BOT");
         res.render("settings", {
             req: req,
             user: req.isAuthenticated() ? req.user : null,
@@ -203,6 +208,6 @@ module.exports = client => {
 
     const http = require("http").createServer(app);
     http.listen(DASHBOARD.WWW.SITE.PORT, () => {
-        console.log(`Dashboard online en el puerto: ${DASHBOARD.WWW.SITE.PORT}, ${DASHBOARD.WWW.SITE.HOST}`);
+        client.logger(`Web Loaded: ${DASHBOARD.WWW.SITE.HOST+":"+DASHBOARD.WWW.SITE.PORT}`);
     });
 }

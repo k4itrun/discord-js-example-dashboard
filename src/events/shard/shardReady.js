@@ -1,3 +1,3 @@
 module.exports = async (client, id) => {
-    client.logger(`Shard \`#${id}\` is ready!`)
+    console.log(`Shard \`#${id}\` is ready!`.dim)
 }

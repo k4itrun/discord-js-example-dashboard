@@ -1,3 +1,3 @@
 module.exports = async (client, id, replayedEvents) => {
-    client.logger(`Shard \`#${id}\` was resumed!`)
+    console.log(`Shard \`#${id}\` was resumed!`.dim)
 }
