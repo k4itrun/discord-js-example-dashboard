@@ -10,15 +10,8 @@ const client = new Discord.Client({
     intents: [ Discord.Intents.FLAGS.GUILDS, Discord.Intents.FLAGS.GUILD_MESSAGES, ]
 });
 
-
-/**********************************************************
- * Iniciar dashboard
- *********************************************************/
 client.on("ready", () => {
     require(`${process.cwd()}/src/dashboard/index.js`)(client);
 })
 
-/**********************************************************
- * Iniciar bot
- *********************************************************/
 client.login(process.env.TOKEN || CONFIG.CLIENT.TOKEN)
