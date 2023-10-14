@@ -27,12 +27,12 @@
                             <div class="mc0">
                                 <div class="mcw">
                                     <div class="mc1">
-                                        <%- guild.icon ? `<div class="mc2" style="background-image: url('https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}');"></div>` : `<div src="https://discord.com/assets/145dc557845548a36a82337912ca3ac5.svg" class="mc3"></div>` %>
+                                        <%- guild.icon ? `<div class="mc2" style="background-image: url('https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}');"></div>` : `<div src="https://logodownload.org/wp-content/uploads/2017/11/discord-logo-4-1.png" class="mc3"></div>` %>
                                         <div class="mc4"></div>
                                         <div class="mc5">
                                             <div class="mc6">
                                                 <div class="mc7">
-                                                    <img loading="lazy" src="https://cdn.discordapp.com/icons/<%- guild.id %>/<%- guild.icon %>" class="mc8">
+                                                    <%- guild.icon ? ` <img loading="lazy" src="https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}" class="mc8">` : `<img loading="lazy" src="https://logodownload.org/wp-content/uploads/2017/11/discord-logo-4-1.png" class="mc8">` %>
                                                 </div>
                                         <% if(bot.guilds.cache.get(guild.id)){ %>
                                             <div class="mc9">

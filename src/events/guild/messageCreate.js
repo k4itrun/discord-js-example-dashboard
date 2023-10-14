@@ -6,7 +6,7 @@ module.exports = async (client, message) => {
   if (!message.guild || message.author.bot || message.guild.available === false || !message.channel || message.webhookId) return
 
   client.settings.ensure(message.guild.id, {
-    PREFIX: CONFIG.PREFIX,
+    PREFIX: CONFIG.CLIENT.PREFIX,
     MESSAGE_BOT: "Hola como estas :)",
   });
 

@@ -13,25 +13,26 @@
             <div class="row">
                 <div class="col mf1">
                     <a class="mf2" href="/">
-                        <img class="mx-auto" width="50" height="50" src="<%= bot.user.displayAvatarURL({size: 128}) %>" />
+                        <img class="mx-auto" width="50" height="50" style="border-radius: 23px;" src="<%= bot.user.displayAvatarURL({extension: "png"}) %>" /><br/>
                         <span class="mf3"><%= bot.user.username %></span> | Discord Bot
                     </a>
                     <div class="mf4">
                         <a class="mf5" href="/">Home</a>
-                        <a class="mf5" href="https://team.arcades.ga/discord" target="_blank">Servidor de soporte</a>
+                        <a class="mf5" href="https://teamarcades.xyz/discord" target="_blank">Servidor</a>
+                        <a class="mf5" href="/dasboard" target="_blank">Configuracion</a>
                     </div>
                     <div class="mf6">
-                        <p class="mb-0">© 2022 <%= bot.user.username %></p>
+                        <p class="mb-0">© 2022 - <%= new Date().getFullYear() %> <%= bot.user.username %></p>
                         <p>All rights reserved</p>
                     </div>
                     <div class="mf4">
-                        <a class="mf7" href="https://team.arcades.ga/discord" title="discord" target="_blank">
+                        <a class="mf7" href="https://teamarcades.xyz/discord" title="discord" target="_blank">
                             <i class="fa-brands fa-discord text-3xl text-[#5865F2]"></i>
                         </a>
                         <a class="mf7" href="/invite" title="invite">
                             <i class="fa-solid fa-right-to-bracket text-3xl"></i>
                         </a>
-                        <a class="mf7" href="https://team.arcades.ga/youtube" title="youtube" target="_blank">
+                        <a class="mf7" href="https://teamarcades.xyz/youtube" title="youtube" target="_blank">
                             <i class="fab fa-youtube text-3xl text-[#ff0000]"></i>
                         </a>
                     </div>
