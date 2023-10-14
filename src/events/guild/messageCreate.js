@@ -1,6 +1,16 @@
 const DASHBOARD = require(`${process.cwd()}/src/JSON/settings.json`);
 const CONFIG = require(`${process.cwd()}/src/JSON/settings.json`);
 const Discord = require("discord.js");
+/**
+ * This JavaScript function handles commands and responses for a Discord bot, including checking the
+ * command prefix, parsing arguments, and executing specific commands.
+ * @param str - The `str` parameter is a string that needs to be escaped. It is used in the
+ * `escapeRegex` function to escape special characters in the string.
+ * @returns The code is returning different responses based on the command provided by the user. If the
+ * command is "prefix", it will reply with the current prefix and a message to go to the dashboard to
+ * change it. If the command is "hi", it will reply with the message stored in the `MESSAGE_BOT`
+ * variable.
+ */
 
 module.exports = async (client, message) => {
   if (!message.guild || message.author.bot || message.guild.available === false || !message.channel || message.webhookId) return

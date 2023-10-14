@@ -1,3 +1,5 @@
+/* The code exports a function that sets up event listeners for unhandled rejections, uncaught
+exceptions, and warnings in a Node.js application. */
 module.exports = () => {
   try {
     process.on('unhandledRejection', (reason, p) => {

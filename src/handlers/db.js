@@ -1,5 +1,14 @@
 const { CLIENT:{ MONGO_URL, PREFIX } } = require(`${process.cwd()}/src/JSON/settings.json`);
 const { Database } = require("quickmongo");
+/**
+ * This JavaScript function connects to a MongoDB database using the provided connection options and
+ * handles reconnection attempts in case of errors or disconnections.
+ * @param ms - The parameter "ms" in the code represents the number of milliseconds to delay the
+ * execution of a function or code block. It is used in the "delay" function to pause the execution for
+ * a specified amount of time before resolving the promise.
+ * @returns The code is returning a promise that resolves to a boolean value indicating whether the
+ * database connection was successfully established.
+ */
 
 module.exports = async (client) => {
   return new Promise(async (resolve) => {
